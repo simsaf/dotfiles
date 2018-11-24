@@ -1,0 +1,5 @@
+#!/bin/dash
+for i in $(grep -o "\"alsoAlbumIds\":\[\([0-9]\{7\},\)*[0-9]\{7\}\],\"albumIds\":\[\([0-9]\{7\},\)*[0-9]\{7\}\]" "$1"  | sed 's/[^0-9,]*//g' | tr "," " ")
+do
+	grep -o "\"id\":${i},\"title\":\"[^\"]*\"" "$1" | sort -u | sed 's/"id":/https:\/\/music.yandex.ru\/album\//; s/,"title":/\t#/' 
+done

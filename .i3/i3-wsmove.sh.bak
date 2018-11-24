@@ -1,0 +1,52 @@
+#!/bin/dash
+
+SUCCESS_CHECK() {
+	grep "\[{\"success\":true}\]" 1>/dev/null
+}
+
+GETJQ_BOOL() {
+	echo "$1" | grep "\""$2"\":true"
+}
+
+GETJQ_STRING() {
+	echo "$1" | sed -n 's/^.*"'$2'":"\([^"]*\)".*$/\1/p'
+}
+
+#WS_LIST=$(i3-msg -t get_workspaces | sed 's/},{/\n/g; s/\(\[{\|}\]\|"rect":{[^}]*},\)//g')
+WS_LIST="$(i3-msg -t get_workspaces | jq -r'.[] .name')"
+
+
+BUF="?"
+bool=false
+
+while $bool
+do
+	BUF="${BUF}?"
+	bool=false
+	for WS_NAME in $WS_LIST
+	do
+		[ "$BUF" = "$WS_NAME" ] && bool=true
+	done
+done
+
+#WS_CUR=$(GETJQ_BOOL "$WS_LIST" "focused")
+WS_CUR_NAME=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name')
+#WS_CUR_NAME=$(GETJQ_STRING "$WS_CUR" "name")
+case "$1" in
+	begin)	for WS in $WS_LIST
+			do	
+				WS_NAME=$(GETJQ_STRING "$WS" "name")
+#				if GETJQ_BOOL "$WS" "focused" 1>/dev/null
+				if [ "$WS_CUR_NAME" = "$WS_NAME" ]
+				then
+					echo "$WS_NAME"
+				else
+					i3-msg rename workspace $WS_NAME to $BUF 2>&1 | SUCCESS_CHECK
+					i3-msg rename workspace $BUF to $WS_NAME 2>&1 | SUCCESS_CHECK
+				fi
+			done ;;
+	end)	i3-msg rename workspace $WS_CUR_NAME to $BUF 2>&1 | SUCCESS_CHECK
+			i3-msg rename workspace $BUF to $WS_CUR_NAME 2>&1 | SUCCESS_CHECK ;;
+esac
+#i3-msg rename workspace $WS_CUR_NAME to $WS_NEW_NAME 2>&1 | SUCCESS_CHECK \
+#	|| i3-msg move container to workspace $WS_NEW_NAME 2>&1 | SUCCESS_CHECK

@@ -1,0 +1,27 @@
+#!/bin/dash
+
+CITY="$1"
+#°
+
+curlToday10(){
+	curl -s https://yandex.ru/pogoda/${CITY}/ 
+}
+getClear(){
+	sed ':a s/<script[^>]*>.*<SCRIPT>//g; s/<\/script>/<SCRIPT>/; t a ; s/\(<[^>]*>\)\+/ /g;  s/{[^}]*}\+//g; s/−/-/g'
+}
+getNowcast(){
+	sed 's/.*<div class="nowcast-alert__text">\([^>]*\)<\/div>.*/\1/'
+}
+getParts(){
+	sed -r -e 's/−/-/g; s/#//g'\
+		-e 's%(fact__temp-wrap|Показать на карте)%%g' \
+		-e 's%(nowcast-alert__)|(fact__(temp|condition|feels-like|yesterday|wind-speed|pressure|humidity|water))[^ ]*%\n#&%g' \
+		-e 's%^[^#]*%%; s%[^#]*$%%' \
+		-e 's%<[^>#]*>%%g'
+}
+clearParts(){
+	sed '$!s/#[^>]*>//; $!s/<[^<]*//'
+}
+curlToday10 | getParts | clearParts
+#curlToday10 | getNowcast
+#curlToday10 | getClear | sed 's/.*\(Сейчас .*Восход\).*/\1/; s/'

@@ -1,0 +1,107 @@
+#!/bin/zsh
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+# -> Предотвращает случайное удаление файлов.
+alias mkdir='mkdir -p -v'
+
+alias h='history'
+alias j='jobs -l'
+alias sr='source ~/.bashrc'
+alias du='du -kh'
+alias df='df -kTh'
+
+# Различные варианты 'ls' (предполагается, что установлена GNU-версия ls)
+alias la='ls -Al'               # показать скрытые файлы
+alias ls='ls -hF --color'       # выделить различные типы файлов цветом
+alias lx='ls -lXB'              # сортировка по расширению
+alias lk='ls -lSr'              # сортировка по размеру
+alias lc='ls -lcr'              # сортировка по времени изменения
+alias lu='ls -lur'              # сортировка по времени последнего обращения
+alias lr='ls -lR'               # рекурсивный обход подкаталогов
+alias lt='ls -ltr'              # сортировка по дате
+alias tree='tree -ChD --noreport --dirsfirst'          # альтернатива 'ls'
+
+export PAGER=less
+#/home/simsaf/.vim/bundle/vimpager/vimpager
+
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+#----------------
+# добавим немножко "приятностей"
+#----------------
+
+function xtitle ()
+{
+	case "$TERM" in
+		*term | rxvt)	echo -n -e "\033]0;$*\007" ;;
+		tmux*)			echo -n -e "\033]2;$*\033\\" ;;
+		*) ;;
+	esac
+}
+
+# псевдонимы...
+alias htop='xtitle Processes on $HOST && htop'
+alias make='xtitle Making $(basename $PWD) ; make'
+alias ncftp="xtitle ncFTP ; ncftp"
+
+# .. и функции
+function man ()
+{
+	for i ; do
+		xtitle man $(basename $1)
+#		xtitle The $(basename $1|tr -d .[:digit:]) manual
+		command man -a "$i"
+	done
+}
+
+function myll(){ ls -l "$@" | egrep "^d" ; ls -lXB "$@" 2>&- | egrep -v "^d"; }
+
+function ranger-cd {
+	tempfile="$(mktemp -t tmp.XXXXXX)"
+	/usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+	test -f "$tempfile" &&
+	if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+		cd -- "$(cat "$tempfile")"
+	fi
+	rm -f -- "$tempfile"
+}
+
+# This binds Ctrl-O to ranger-cd:
+#bindkey "\C-o" ranger-cd
+bindkey "\e[A": history-search-backward
+bindkey "\e[B": history-search-forward
+
+alias mplayer='mplayer.ext'
+alias rsync='rsync -Phr'
+alias free='free -h'
+alias maple='/home/simsaf/maple12/bin/maple'
+alias fum='fusermount -u '
+alias vimpager='/home/simsaf/.vim/bundle/vimpager/vimpager'
+alias ftpfs='printf "endIP: " && read  ipend && printf "\nLogin: " && read login && printf  "\nPass: " && read pass && curlftpfs ftp://$login:$pass@192.168.0.$ipend:3721/ temp-ftpfs-android/'
+alias tree='tree --timefmt %H:%M:%S -d'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias hcat='highlight -O ansi'
+alias icat='catimg'
+alias google='echo -n "Google: " && read google && wyeb https://encrypted.google.com/search\?hl\=ru\&q\=$google &'
+alias gc='git clone'
+alias tremc='tremc -c simsaf:transdrone@127.0.0.1:9091'
+alias vimterm='vim -c terminal++curwin'
+alias tmuxin='~/sources/myShell/tmuxin.sh'
+alias nnnn='~/sources/nnn/nnnn.sh'
+alias ytdl='youtube-dl'
+alias ytv='youtube-viewer --results=$([ $(($(tput lines)-4)) -le 50 ] && echo $(($(tput lines)-4)) || print 50)'
+alias twdl='~/sources/myShell/twdl.sh'
+alias transmission='~/sources/myShell/transmission-start.sh'
+alias centerim5='./.i3/chicon.sh vk; centerim5'
+alias ncmpcpp='./.i3/chicon.sh music; mpc || mpd && ncmpcpp'
+alias zxtune='./.i3/chicon.sh music; /home/simsaf/Music/ZXTune/zxtune.sh'
+alias tg='~/.i3/chicon.sh tg ;  torsocks telegram-cli -P 7374 -W -A -N '

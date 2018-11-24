@@ -1,0 +1,4 @@
+colorizer-0.11.vmb: call delete('/home/simsaf/.vim/plugin/ColorizerPlugin.vim')|call delete('/home/simsaf/.vim/doc/Colorizer.txt')|call delete('/home/simsaf/.vim/autoload/Colorizer.vim')
+Colorizer.vmb: call delete('/home/simsaf/.vim/plugin/ColorizerPlugin.vim')|call delete('/home/simsaf/.vim/doc/Colorizer.txt')|call delete('/home/simsaf/.vim/autoload/Colorizer.vim')
+supertab.vmb: call delete('/home/simsaf/.vim/doc/supertab.txt')|call delete('/home/simsaf/.vim/plugin/supertab.vim')
+netrw.vba.gz: call delete('/home/simsaf/.vim/plugin/netrwPlugin.vim')|call delete('/home/simsaf/.vim/autoload/netrw.vim')|call delete('/home/simsaf/.vim/autoload/netrwFileHandlers.vim')|call delete('/home/simsaf/.vim/autoload/netrwSettings.vim')|call delete('/home/simsaf/.vim/doc/pi_netrw.txt')|call delete('/home/simsaf/.vim/syntax/netrw.vim')|call delete('/home/simsaf/.vim/autoload/netrw_gitignore.vim')

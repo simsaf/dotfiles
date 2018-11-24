@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/.vim/vimrc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="vim">
+<meta name="settings" content="number_lines,use_css,pre_wrap,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="8bit_emulate">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.LineNr { color: #804000; background-color: #000000; padding-bottom: 1px; }
+.Comment { color: #0000c0; background-color: #000000; padding-bottom: 1px; font-style: italic; }
+.Constant { color: #c00000; }
+.Special { color: #c000c0; }
+.Identifier { color: #008080; }
+.Statement { color: #804000; }
+.PreProc { color: #c000c0; }
+.Type { color: #008000; }
+.Error { color: #c0c0c0; background-color: #c00000; padding-bottom: 1px; font-weight: bold; }
+.Folded { color: #0000c0; background-color: #000000; padding-bottom: 1px; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr">  1 </span><span class="Statement">set</span> <span class="PreProc">nocompatible</span>                <span class="Comment">&quot; be iMproved, required</span>
+<span id="L2" class="LineNr">  2 </span><span class="Statement">filetype</span> <span class="Type">off</span>                    <span class="Comment">&quot; required</span>
+<span id="L3" class="LineNr">  3 </span><span class="Statement">colorscheme</span> <span class="Constant">8</span>bit_emulate
+<span id="L4" class="LineNr">  4 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L5" class="Folded">  5 </span><span class="Folded">+-- 27 lines: &quot;------- Vundle                                                                                         </span>
+<span id="L32" class="LineNr"> 32 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L33" class="Folded"> 33 </span><span class="Folded">+--  8 lines: --------- plugin for                                                                                    </span>
+<span id="L41" class="LineNr"> 41 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L42" class="Folded"> 42 </span><span class="Folded">+-- 55 lines: --------- SET SECTION                                                                                   </span>
+<span id="L97" class="LineNr"> 97 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L98" class="Folded"> 98 </span><span class="Folded">+--128 lines: --------- LIGHTLINE SECTION                                                                             </span>
+<span id="L226" class="LineNr">226 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L227" class="Folded">227 </span><span class="Folded">+-- 85 lines: --------- MAP SECTION                                                                                   </span>
+<span id="L312" class="LineNr">312 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L313" class="LineNr">313 </span><span class="Comment">&quot;--------- FUNCTION SECTION {{{</span>
+<span id="L314" class="Folded">314 </span><span class="Folded">+--- 20 lines: function! LookMode()                                                                                   </span>
+<span id="L334" class="Folded">334 </span><span class="Folded">+--- 10 lines: function! PositionMode()                                                                               </span>
+<span id="L344" class="Folded">344 </span><span class="Folded">+--- 10 lines: function! InsertTabWrapper(direction)                                                                  </span>
+<span id="L354" class="LineNr">354 </span><span class="Comment">&quot;inoremap &lt;tab&gt; &lt;c-r&gt;=InsertTabWrapper (&quot;forward&quot;)&lt;cr&gt;</span>
+<span id="L355" class="LineNr">355 </span><span class="Comment">&quot;inoremap &lt;s-tab&gt; &lt;c-r&gt;=InsertTabWrapper (&quot;backward&quot;)&lt;cr&gt;</span>
+<span id="L356" class="Folded">356 </span><span class="Folded">+--- 11 lines: function! InsertCrWrapper()                                                                            </span>
+<span id="L367" class="Folded">367 </span><span class="Folded">+---  5 lines: function! Pacvim()                                                                                     </span>
+<span id="L372" class="Folded">372 </span><span class="Folded">+---  6 lines: function! VimExlporer()                                                                                </span>
+<span id="L378" class="Folded">378 </span><span class="Folded">+---  4 lines: TODO function! MyVerticalFinder()                                                                      </span>
+<span id="L382" class="Folded">382 </span><span class="Folded">+--- 25 lines: function! MyCommenter(sendmode)                                                                        </span>
+<span id="L407" class="LineNr">407 </span><span class="Statement">function</span>! MyColumnator<span class="Special">(</span>sepr<span class="Special">)</span> <span class="Comment">&quot;{{{</span>
+<span id="L408" class="LineNr">408 </span>    <span class="Statement">let</span> <span class="Identifier">temp_sepr</span> <span class="Statement">=</span> <span class="Constant">'%'</span>
+<span id="L409" class="LineNr">409 </span>    <span class="Statement">exec</span> <span class="Constant">&quot;\'&lt;,\'&gt;!sed \'/^[a-zA-Z\t\ ]/s/&quot;</span><span class="Statement">.</span><span class="Identifier">a:sepr</span><span class="Statement">.</span><span class="Constant">&quot;\+/&quot;</span><span class="Statement">.</span><span class="Identifier">temp_sepr</span><span class="Statement">.</span><span class="Constant">&quot;/g\'&quot;</span>
+<span id="L410" class="LineNr">410 </span><span class="Comment">&quot;   exec </span><span class="Constant">&quot;\'&lt;,\'&gt;!column -t -s &quot;</span><span class="Comment">.temp_sepr.&quot; -o ' </span><span class="Constant">&quot;.a:sepr.&quot;</span><span class="Comment"> '&quot;</span>
+<span id="L411" class="LineNr">411 </span><span class="Statement">endfunction</span> <span class="Comment">&quot; }}}</span>
+<span id="L412" class="LineNr">412 </span><span class="Comment">&quot;--------- }}}</span>
+<span id="L413" class="LineNr">413 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L414" class="LineNr">414 </span><span class="Comment">&quot;--------- COMMAND SECTION {{{</span>
+<span id="L415" class="LineNr">415 </span><span class="Statement">command</span>! Surf              <span class="Statement">:</span><span class="Statement">call</span> SurfLine()<span class="Special">&lt;</span><span class="Special">cr</span><span class="Special">&gt;</span>
+<span id="L416" class="LineNr">416 </span><span class="Statement">command</span>! BuildJava         <span class="Statement">:</span><span class="Statement">w</span> | !JAVA_BUILD=%; cd $<span class="Special">{</span>JAVA_BUILD\%/*<span class="Special">}</span>; JAVA_BUILD=$<span class="Special">{</span>JAVA_BUILD\#\#*/<span class="Special">}</span>; javac $JAVA_BUILD &amp;&amp; java $<span class="Special">{</span>JAVA_BUILD\%\<span class="Statement">.</span>java<span class="Special">}</span> &amp;&amp; unset JAVA_BUILD
+<span id="L417" class="LineNr">417 </span><span class="Statement">command</span>! BuildCtmux        <span class="Statement">:</span><span class="Statement">w</span> | <span class="Identifier">call</span> <span class="Identifier">system</span>(<span class="Constant">'tmux send-keys -t gcc &quot;^C gcc '</span> <span class="Statement">.</span> <span class="Identifier">expand</span>(<span class="Constant">&quot;%&quot;</span>) <span class="Statement">.</span> <span class="Constant">' &amp;&amp; ./a.out ^M&quot;'</span>)
+<span id="L418" class="LineNr">418 </span><span class="Statement">command</span>! Gcc               <span class="Statement">:</span><span class="Statement">w</span> | echo <span class="Identifier">system</span>(<span class="Constant">'gcc '</span> <span class="Statement">.</span> <span class="Identifier">expand</span>(<span class="Constant">&quot;%&quot;</span>) <span class="Statement">.</span> <span class="Constant">&quot; -o &quot;</span> <span class="Statement">.</span> <span class="Identifier">expand</span>(<span class="Constant">&quot;%:r&quot;</span>))
+<span id="L419" class="LineNr">419 </span><span class="Statement">command</span>! GccRun            <span class="Statement">:</span><span class="Statement">w</span> | echo <span class="Identifier">system</span>(<span class="Constant">'gcc '</span><span class="Statement">.</span><span class="Identifier">expand</span>(<span class="Constant">&quot;%&quot;</span>)<span class="Statement">.</span><span class="Constant">&quot; -o &quot;</span><span class="Statement">.</span><span class="Identifier">expand</span>(<span class="Constant">&quot;%:r&quot;</span>)<span class="Statement">.</span><span class="Constant">&quot; &amp;&amp; ./&quot;</span><span class="Statement">.</span><span class="Identifier">expand</span>(<span class="Constant">&quot;%:r&quot;</span>))
+<span id="L420" class="LineNr">420 </span><span class="Statement">command</span>! GccGdbRun         <span class="Statement">:</span><span class="Statement">w</span> | echo <span class="Identifier">system</span>(<span class="Constant">'gcc '</span><span class="Statement">.</span><span class="Identifier">expand</span>(<span class="Constant">&quot;%&quot;</span>)<span class="Statement">.</span><span class="Constant">&quot; -g -o &quot;</span><span class="Statement">.</span><span class="Identifier">expand</span>(<span class="Constant">&quot;%:r&quot;</span>)) | ConqueGdb <span class="Identifier">expand</span>(<span class="Constant">&quot;%:r&quot;</span>)
+<span id="L421" class="LineNr">421 </span><span class="Statement">command</span>! ReloadVim         <span class="Statement">:</span><span class="Statement">so</span> ~/<span class="Statement">.</span><span class="Statement">vim</span>/vimrc
+<span id="L422" class="LineNr">422 </span><span class="Statement">command</span>! Colorize          <span class="Statement">:</span><span class="Statement">set</span> t_Co=256 | ColorHighligh
+<span id="L423" class="LineNr">423 </span><span class="Comment">&quot;command! Latex            :w | !pdflatex % &amp;&amp; exit</span>
+<span id="L424" class="LineNr">424 </span><span class="Statement">command</span>! Maple             <span class="Statement">:</span><span class="Statement">w</span> | !clear; sh ~/maple12/bin/maple <span class="Identifier">%</span> &amp;&amp; exit
+<span id="L425" class="LineNr">425 </span><span class="Statement">command</span>! MapleLog          <span class="Statement">:</span><span class="Statement">w</span> | !clear; sh ~/maple12/bin/maple &gt;&gt; maple_now.<span class="Identifier">log</span> <span class="Identifier">%</span> &amp;&amp; exit
+<span id="L426" class="LineNr">426 </span><span class="Statement">command</span>! Column1            <span class="Statement">:</span>'&lt;<span class="Statement">,</span>'&gt;!sed <span class="Constant">'/^[a-zA-Z\t]/s/ \+/^T/g'</span> | column <span class="Error">-t</span> <span class="Statement">-s</span> <span class="Special">^T</span>  <span class="Error">-o</span> <span class="Constant">&quot;  &quot;</span>
+<span id="L427" class="LineNr">427 </span><span class="Comment">&quot;---------}}}</span>
+<span id="L428" class="LineNr">428 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L429" class="Folded">429 </span><span class="Folded">+-- 40 lines: --------- NERDTree                                                                                      </span>
+<span id="L469" class="LineNr">469 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L470" class="Folded">470 </span><span class="Folded">+--  4 lines: --------- LATEX SECTION                                                                                 </span>
+<span id="L474" class="LineNr">474 </span><span class="Comment">&quot;=====================================================================</span>
+<span id="L475" class="Folded">475 </span><span class="Folded">+--140 lines: --------- RUSSIAN LOCALE                                                                                </span>
+<span id="L615" class="LineNr">615 </span><span class="Comment">&quot;=====================================================================</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

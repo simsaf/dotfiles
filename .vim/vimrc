@@ -1,0 +1,388 @@
+
+set nocompatible                " be iMproved, required
+filetype off                    " required
+"=====================================================================
+"--------- PATHOGEN {{{
+filetype plugin indent on    " required
+"--------- filetype plugin on " To ignore plugin indent changes, instead use:
+execute pathogen#infect()
+
+syntax on
+filetype on                    " required
+"--------- }}}
+"=====================================================================
+"--------- SET SECTION {{{
+set foldmethod=marker
+set foldmarker={{{,}}}
+set fillchars=vert:┃,fold:\ " ---▌-▌--⎥--┃- │║▕┃
+"set iminsert=0                  " по умолчанию - латинская раскладка
+"set imsearch=0                  " по умолчанию - латинская раскладка при поиске
+set ic                          " игнорировать регистр при поиске
+"set hls                        " подсвечивать поиск
+set is                          " использовать инкрементальный поиск
+set textwidth=92                " ширина текста
+"set textwidth=113               " ширина текста
+set showbreak=»                 " символ переноса в начале строки wrap
+"set colorcolumn=116              " отметить 80 колонку
+"set showbreak=⎬\ \ \                " символ переноса в начале строки wrap
+set wrapmargin=0                " ширина текста
+set winminheight=0              " минимальная высота окна пусть будет 0 (по умолчанию - 1)
+set formatoptions=cqtjro        " автоперенос по gq: (c)omment, (t)ext, q-auto, (j)oin без \" , (l)ong not breaks, ro-auto add comma after o \r set noequalalways
+"set winheight=9999             " всегда делать активное окно максимального размера
+"set iskeyword=@,48-57,_,192-255 "настраиваю для работы с русским(чтоб w,b,* понимали русские слова)
+set tabstop=4                   " задать размер табуляции в четыре пробела
+set showcmd                     " отображение выполняемой команды
+set shiftwidth=4                " колво пробелов при сдвиге по >>
+set linebreak                   " перенос по словам, а не по буквам
+"set dy=lastline
+set number                      " включить нумерацию
+set icon
+set wrap
+"set paste                      " при вставке из внешнего буффера эскейп последовательносте
+"set visualbell                 " Включаем виртуальный звонок (мигание вместо спикера)
+set backspace=indent,eol,start  " разрешает удаление табов и \n (в 8.0 включает <BS> ваапче)
+set hidden                      " Не выгружать буфер, когда переключаемся на другой файл
+set term=xterm
+set t_Co=256                    " Использовать больше цветов в терминале
+colorscheme 8bit_emulate
+"set t_AB=[48;5;%dm                    " Использовать больше цветов в терминале
+"set t_AF=[38;5;%dm                    " Использовать больше цветов в терминале
+set showtabline=1               " Показывать строку вкладок всегда
+set wildmenu                    " Автодополнения в статусбаре
+set wildignore=*.o,*.out,*.zip,*.rar,*.jpg
+set wildmode=longest,full
+set wildmode=longest,list,full
+set laststatus=2                " Показывать строку статуса всегда
+set title                       " Показывать имя буфера в заголовке терминала
+set confirm                     " Использовать диалоги вместо сообщений об ошибках
+set titlestring=%t%(\ %m%)%(\ %r%)%(\ %h%)%(\ %w%) " Формат заголовка
+"set titlestring=%t%(\ %m%)%(\ %r%)%(\ %h%)%(\ %w%)%(\ (%{expand(\"%:p:~:h\")})%)\ -\ VIM " Формат заголовка
+set list                        " установить режим отображения спец-символов
+set listchars=nbsp:.,tab:┊\ ,precedes:«,extends:»,trail:~,eol:╎  " eol:$╎ ╎установить спец-символы  
+set mouse=a
+set virtualedit=block           " курсор может передвигаться по пустому пр-ву. при блочном выделение
+set clipboard=autoselect,unnamedplus  "копирование по уу и выделению в + вместо *
+let g:bufferline_echo = 0
+let g:bufferline_fname_mod = ':t:~'
+let g:bufferline_modified = ':+'
+
+"set langmap=ёйцукенгшщзхъфывапролджэячсмитьюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl;'zxcvbnm.~QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<> 
+"set langmap=б;","
+"---------}}}
+"=====================================================================
+"--------- LIGHTLINE SECTION {{{
+
+"set fillchars+=stlnc:_
+"set statusline=%h%{StatusLineSep()}%<%f%{StatusLineSep()}%m%{StatusLineSep()}%r%{StatusLineSep()}%=%{StatusLineSep()}%{&filetype}%{StatusLineSep()}%{&encoding}%{StatusLineSep()}%l:%v%{StatusLineSep()}%P\ " TODO
+"let g:lightline = {{{
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '|', 'right': '|' },
+	\ 'active': {
+	\	'left': [ [ 'mode', 'paste', 'lookmode' ], [ 'filepath', 'readonly', 'filename', 'modified'], ['bufferlinesl']  ],
+	\	'right': [ ['percent'], [ 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 'component_function': {
+	\	'readonly'      :  'LightlineReadonly',
+	\	'modified'      :  'LightlineModified',
+	\	'filename'      :  'LightlineFilename',
+	\	'filepath'      :  'LightlineFilepath',
+	\	'fileformat'    :  'LightlineFileformat',
+	\	'filetype'      :  'LightlineFiletype',
+	\	'fileencoding'  :  'LightlineFileencoding',
+	\	'mode'          :  'LightlineMode',
+	\	'bufferlinesl'  :  'bufferline#get_echo_string',
+	\	'lookmode'      :  'LookModeSLine'
+	\ }
+	\ }
+" }}}
+	function! LookModeSLine() "{{{
+		if exists("b:LookModeState") == 0
+			let b:LookModeState = "off"
+		endif
+	return b:LookModeState == "off" ? '' : 'LookMode'
+	endfunction " }}}
+	function! LightlineModified() "{{{
+		return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+	endfunction " }}}
+	function! LightlineReadonly() "{{{
+		return &ft !~? 'help' && &readonly ? '' : ''
+	endfunction " }}}
+	function! StatusLineSep() "{{{
+		let sep = '  | '
+		return sep
+	endfunction "}}}
+
+	function! LightlineFilepath() "{{{
+		let fpath = getcwd()
+		let fpath = substitute(fpath, expand('~'), "~", "")
+		return fpath
+	endfunction "}}}
+
+	function! LightlineFilename() "{{{
+		let fname = expand('%:t')
+		let ffull = substitute(expand('%f'), expand('~'), "~", "")
+		return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item        :
+				\ fname == '__Tagbar__'                                  ? g:lightline.fname             :
+				\ fname =~ '__Gundo\|NERD_tree'                          ? ''                            :
+				\ &ft == 'vimfiler'                                      ? vimfiler#get_status_string()  :
+				\ &ft == 'unite'                                         ? unite#get_status_string()     :
+				\ &ft == 'vimshell'                                      ? vimshell#get_status_string()  :
+				\ &ft == 'help'                                          ? 'HELP'                        :
+				\ ('' != fname                                           ? ffull            : '[No Name]')
+	endfunction " }}}
+	function! LightlineFileformat() "{{{
+		return winwidth(0) > 95 ? &fileformat : ''
+	endfunction " }}}
+	function! LightlineFiletype() "{{{
+		return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+	endfunction " }}}
+	function! LightlineFileencoding() "{{{
+		return winwidth(0) > 95 ? (&fenc !=# '' ? &fenc : &enc) : ''
+	endfunction " }}}
+	function! LightlineMode() "{{{
+		let fname = expand('%:t')
+		return fname      == '__Tagbar__'        ? 'Tagbar'         :
+			\ fname       == 'ControlP'          ? 'CtrlP'          :
+			\ fname       == '__Gundo__'         ? 'Gundo'          :
+			\ fname       == '__Gundo_Preview__' ? 'Gundo Preview'  :
+			\ fname       =~ 'NERD_tree'         ? 'NERDTree'       :
+			\ &ft         == 'help'              ? 'HELP'           :
+			\ &ft         == 'unite'             ? 'Unite'          :
+			\ &ft         == 'vimfiler'          ? 'VimFiler'       :
+			\ &ft         == 'vimshell'          ? 'VimShell'       :
+			\ winwidth(0) >  60                  ? lightline#mode() : ''
+	endfunction " }}}
+	let g:unite_force_overwrite_statusline = 0
+	let g:vimfiler_force_overwrite_statusline = 0
+	let g:vimshell_force_overwrite_statusline = 0
+"---------}}}
+"=====================================================================
+"--------- MAP SECTION {{{
+set <M-s>=s
+set <M-p>=0
+set <M-e>=e
+set <M-n>=n
+set <M-b>=b
+set <M-/>=/
+"set <M-PageUp>=[5~
+"set <M-PageDown>=[6~
+"let &t_8f="<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b="<Esc>[48;2;%lu;%lu;%lum"
+nnoremap [6;3~     :bnext<CR>
+nnoremap [5;3~     :bprevious<CR>
+"nnoremap [6;3~       :tabnext<CR>
+"nnoremap [5;3~       :tabprevious<CR>
+"nnoremap <M-Right>     :bnext<CR>
+"nnoremap <M-Left>      :bprevious<CR>
+tnoremap [6;3~       <C-W>:tabnext<CR>
+tnoremap [5;3~       <C-W>:tabprevious<CR>
+tnoremap <M-Right>     <C-W>:bnext<CR>
+tnoremap <M-Left>      <C-W>:bprevious<CR>
+tnoremap <C-W>         <C-W>.
+"--------- use Alt-Left and Alt-Right to move current tab to left or right
+"nnoremap <silent> <M-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+"nnoremap <silent> <M-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+"nnoremap <silent> [1;3D :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+"nnoremap <silent> [1;3C :execute 'silent! tabmove ' . tabpagenr()<CR>
+"--------- Tab is Next window
+nnoremap <c-w><c-left>  <C-W>h
+nnoremap <c-w><c-right> <C-W>l
+nnoremap <c-w><c-down>  <C-W>j
+nnoremap <c-w><c-up>    <C-W>k
+nnoremap <c-w><s-left>  <C-W>H
+nnoremap <c-w><s-right> <C-W>L
+nnoremap <c-w><s-down>  <C-W>J
+nnoremap <c-w><s-up>    <C-W>K
+"--------- переключение подсветки поиска по backspace
+nnoremap <C-?>         :set hls!<CR>
+nnoremap o             o<esc>
+nnoremap O             O<esc>
+inoremap <cr>          <c-r>=InsertCrWrapper()<cr>
+nnoremap <cr>          i<cr><esc>
+nnoremap <S-Down>      Vj
+nnoremap <S-Up>        Vk
+nnoremap <C-Down>      <C-v>j
+nnoremap <C-Up>        <C-V>k
+vnoremap <S-Down>      j
+vnoremap <S-Up>        k
+vnoremap <C-Down>      j
+vnoremap <C-Up>        k
+nnoremap <C-j>         <C-e>
+nnoremap <C-k>         <C-y>
+inoremap <C-a>         <esc>I
+inoremap <C-e>         <esc>A
+"nnoremap gt            :tabnew<cr>
+"nnoremap gT            :tabnew<cr>
+nnoremap gn            :tabnew<cr>
+"nnoremap gN            :tabprew<cr>
+nnoremap lkm           :call LookMode()<cr>
+nnoremap num           :set  number!<cr>
+nnoremap syn           :if exists("g:syntax_on") \| syntax off \| else \| syntax enable \| endif <cr>
+nnoremap znr           :set  relativenumber!<cr>
+nnoremap ze            :NERDTreeTabsToggle<cr>
+nnoremap zp            :set  cursorline!<cr>
+nnoremap <F5>          :ReloadVim<cr>
+nnoremap <F6>          :%s/ \+$//<cr>
+nnoremap gw            :execute '!surf ' . getline('.') . '&' <cr>
+nnoremap bn            :bn<cr>
+nnoremap bN            :bN<cr>
+nnoremap bd            :bd<cr>
+
+imap 1;5Z <Plug>snipMateNextOrTrigger
+smap <c-p> <Plug>snipMateNextOrTrigger
+imap <c-\>t <Plug>snipMateTrigger
+imap <c-\>n <Plug>snipMateBack
+smap <c-n> <Plug>snipMateBack
+imap <c-\>s <Plug>snipMateShow
+imap <c-\>v <Plug>snipMateVisual
+
+nnoremap <M-/> :call MyCommenter("n")<cr>
+vnoremap <M-/> :call MyCommenter("V")<cr>
+
+
+"--------- }}}
+"=====================================================================
+"--------- FUNCTION SECTION {{{
+function! LookMode() "{{{
+	if exists("b:LookModeState") == 0
+		let b:LookModeState = "off"
+	endif
+	if b:LookModeState == "on"
+		let b:LookModeState = "off"
+		echo "LookModeOff"
+		set foldcolumn=0
+		unmap <buffer> j
+		unmap <buffer> k
+		unmap <buffer> <Down>
+		unmap <buffer> <Up>
+		"colorscheme 8bit_emulate
+	else
+		let b:LookModeState = "on"
+		echo "LookModeOn"
+		nnoremap <buffer> j      j<C-e>
+		nnoremap <buffer> k      k<C-y>
+		nnoremap <buffer> <Down> j<C-e>
+		nnoremap <buffer> <Up>   k<C-y>
+		"hi LineNr ctermfg=0
+		set foldcolumn=3
+	endif
+endfunction "}}}
+function! PositionMode() "{{{
+	if exists("b:PositionModeSet") == 0
+		let b:PositionModeSet = "off"
+	endif
+	if b:PositionModeSet == "off"
+		echo "Position Mode ON"
+	else
+		echo "Position Mode OFF"
+	endif
+endfunction "}}}
+function! InsertTabWrapper(direction) "{{{
+	let col = col('.') - 1
+	if !col || getline('.')[col - 1] !~ '\k'
+		return "\<tab>"
+	elseif "backward" == a:direction
+		return "\<c-p>"
+	else
+		return "\<c-n>"
+	endif
+endfunction " }}}
+"inoremap <tab> <c-r>=InsertTabWrapper ("forward")<cr>
+"inoremap <s-tab> <c-r>=InsertTabWrapper ("backward")<cr>
+function! InsertCrWrapper() "{{{
+	let temp_char = getline('.')[col('.')-1]
+	let cur_col = col('.')
+	if temp_char !~ '\p' " || temp_char =~ '\s' оно реагирует на табы и непринтабельные чары надо переделать но мне лень
+		return "\<cr>"
+		"return "win"
+	else
+		return "\<esc>l"
+		"return "fail"
+	endif
+endfunction " }}}
+function! Pacvim() "{{{
+	exec '%s/^Название    /Название {{{/'
+	exec '%s/^Проверен    /Проверен }}}/'
+	exec 'g/^$/d'
+endfunction " }}}
+function! VimExlporer() "{{{
+	set filetype=fs
+	nnoremap go          :execute '!echo " loadfile ' . getcwd() . '/' .  getline('.') . ' " > /home/simsaf/.mplayer/mp-in' <cr>
+	nnoremap cd          :execute 'cd ' . getline('.') . '/'<cr>
+	nnoremap ls          ggVGd:execute 'r !ls -pb' <cr>
+endfunction "}}}
+" TODO function! MyVerticalFinder() "{{{
+"while to getline(n)[m] == findchar   n++
+"
+"endfunction "}}}
+function! MyCommenter(sendmode) "{{{
+	let ft_comma =  (  &ft  ==  'c'     ?  '//'  :
+					\  &ft  ==  'cpp'   ?  '//'  :
+					\  &ft  ==  'java'  ?  '//'  :
+					\  &ft  ==  'lua'   ?  '--'  :
+					\  &ft  ==  'vim'   ?  '"'   :
+					\  &ft  ==  'sh'    ?  '#'   :
+					\  &ft  ==  'tmux'  ?  '#'   :
+					\  &ft  ==  'conf'  ?  '#'   :
+					\  &ft  ==  'gdb'   ?  '#'   :
+					\  &ft  ==  'tex'   ?  '%'   :
+					\  '#')
+	let range_comma =	( a:sendmode == 'n'     ? ( getline('.') =~ ".*{$" ? '.,/}$/' : '.' ) :
+						\ '' )
+"not need						\ a:sendmode == 'V'     ? "'<,'>"                                     :
+"TODO
+"						\ a:sendmode == 'no'    ? "block"                                     :
+"						\ a:sendmode == '<C-V>' ? "block"                                     :
+"						\ a:sendmode == 'v'     ? "block"                                     :
+	if getline('.') =~ "^" . ft_comma . ".*"
+		exec range_comma . 's$^' . ft_comma . '$$'
+	else
+		exec range_comma . 's$^$' . ft_comma . '$'
+	endif
+		"exec '.s/\(^\t*\)' . ft_comma . '/\1/'
+		"exec '.s$\(^\t*\)$\1' . ft_comma . '$'
+endfunction " }}}
+function! MyColumnator(sepr) "{{{
+	let temp_sepr = '%'
+	exec "\'<,\'>!sed \'/^[a-zA-Z\t\ ]/s/".a:sepr."\+/".temp_sepr."/g\'"
+"	exec "\'<,\'>!column -t -s ".temp_sepr." -o ' ".a:sepr." '"
+endfunction " }}}
+function! Reg2slmenu() "{{{
+"	execute('!~/sources/myShell/vim-reg2slmenu.sh')
+	let out_var = execute('reg')
+	let out_var = execute("execute '!echo ' . shellescape(out_var, 1) . ' | slmenu -l 33 -t'")
+	echo "##" . shellescape(out_var) . "##"
+endfunction "}}}
+"--------- }}}
+"=====================================================================
+"--------- COMMAND SECTION {{{
+command! Surf              :call SurfLine()<cr>
+command! BuildJava         :w | !JAVA_BUILD=%; cd ${JAVA_BUILD\%/*}; JAVA_BUILD=${JAVA_BUILD\#\#*/}; javac $JAVA_BUILD && java ${JAVA_BUILD\%\.java} && unset JAVA_BUILD
+command! BuildCtmux        :w | call system('tmux send-keys -t gcc " gcc ' . expand("%") . ' && ./a.out "')
+command! Gcc               :w | echo system('gcc ' . expand("%") . " -o " . expand("%:r"))
+command! GccRun            :w | echo system('gcc '.expand("%")." -o ".expand("%:r")." && ./".expand("%:r"))
+command! GccGdbRun         :w | echo system('gcc '.expand("%")." -g -o ".expand("%:r")) | ConqueGdb expand("%:r")
+command! ReloadVim         :so ~/.vim/vimrc
+command! Colorize          :set t_Co=256 | ColorHighligh
+"command! Latex            :w | !pdflatex % && exit
+command! Maple             :w | !clear; sh ~/maple12/bin/maple % && exit
+command! MapleLog          :w | !clear; sh ~/maple12/bin/maple >> maple_now.log % && exit
+command! Regs              :!zsh -c '~/sources/myShell/vim-reg2slmenu.sh'
+"command! Regs              :!sh ~/sources/myShell/vim-reg2slmenu.sh
+command! Column1   -range          :'<line-1>,'<line-2>!sed '/^[a-zA-Z\t]/s/ \+//g' | column -t -s   -o "  "
+"---------}}}
+"=====================================================================
+"--------- LATEX SECTION{{{
+let g:Latex_PdfViewer="zathura"
+let g:vimtex_view_method='zathura'
+"---------}}}
+"=====================================================================
+"
+"augroup filetypedetect
+"	au! BufRead,BufNewFile * 
+	if getline(1) =~ '^#!.*dash'
+		setfiletype sh
+	endif
+"augroup END

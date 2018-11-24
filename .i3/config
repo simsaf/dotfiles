@@ -1,0 +1,183 @@
+set $mod Mod4
+#font pango:DejaVuSansMono Nerd Font 8, Dina 12
+font pango:Dina 8
+#font pango:Dina, DejaVuSansMono Nerd Font 8
+#font pango:DejaVuSansMono Nerd Font 8
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+#
+
+#{{{ START APPS
+	bindsym $mod+Return         exec st -e "tmux" #new-session  "~/sources/myShell/tmuxin.sh"
+	bindsym $mod+b              workspace 11 ; exec --no-startup-id st ; fullscreen enable
+
+#	bindsym $mod+b              exec wyeb
+#}}}
+# start a DISPLAYLAYOUT{{{
+	bindsym $mod+F1             exec ~/.scripts/shrandr.sh SQUARE; exec echo "r" > ~/.i3/ind_fifo
+	bindsym $mod+F2             exec ~/.scripts/shrandr.sh SQUAREDUAL; exec echo "r" > ~/.i3/ind_fifo
+	bindsym $mod+F3             exec ~/.scripts/shrandr.sh MINI; exec echo "r" > ~/.i3/ind_fifo
+#}}}
+# start WIDGETS {{{
+	#bindsym --release ISO_Next_Group  exec pkill -SIGRTMIN+11 i3blocks
+	#bindcode 50                exec pkill -SIGRTMIN+11 i3blocks
+	#bindsym Caps_Lock           exec pkill -SIGRTMIN+12 i3blocks
+	bindsym --release Caps_Lock exec echo "c" > ~/.i3/ind_fifo
+	bindsym $mod+Ctrl+n        exec echo "n" > ~/.i3/ind_fifo
+	bindsym $mod+r              exec dmenu_run
+	bindsym $mod+Shift+q        exec ~/.i3/dmenu_exit.sh
+	bindsym $mod+Ctrl+p [class="stbar"] kill; exec ~/.i3/start_stbar.sh bar
+	bindsym $mod+Ctrl+semicolon exec ~/.i3/start_stbar.sh shell
+
+# }}}
+
+# Music {{{
+	bindsym $mod+period         exec ~/.i3/volum.sh +
+	bindsym $mod+comma          exec ~/.i3/volum.sh -
+	bindsym $mod+slash          exec ~/.i3/volum.sh =
+#	bindsym $mod+Shift+less     exec mocp --previous
+#	bindsym $mod+Shift+greater  exec mocp --next
+#	bindsym $mod+space          exec mocp --toggle-pause
+#	bindsym $mod+m              exec ~/.moc/to_stbar_pipe.sh
+	bindsym $mod+Shift+less     exec mpc prev -q
+	bindsym $mod+Shift+greater  exec mpc next -q
+	bindsym $mod+space          exec mpc toggle -q
+	bindsym $mod+m              exec ~/.mpd/to_stbar_pipe.sh
+# }}}
+# change focus{{{
+	bindsym $mod+h              focus    left
+	bindsym $mod+j              focus    down
+	bindsym $mod+k              focus    up
+	bindsym $mod+l              focus    right
+	bindsym $mod+Left           focus    left
+	bindsym $mod+Down           focus    down
+	bindsym $mod+Up             focus    up
+	bindsym $mod+Right          focus    right
+#}}}
+# split in horizontal orientation{{{
+	bindsym $mod+s              split    h
+	bindsym $mod+v              split    v
+	bindsym $mod+f                       fullscreen
+	bindsym $mod+q              layout   stacking
+	bindsym $mod+w              layout   tabbed
+	bindsym $mod+e              layout   toggle split
+	bindsym $mod+Shift+space    floating toggle
+	# change focus between tiling / floating windows
+	bindsym $mod+Ctrl+Left      focus    mode_toggle
+	bindsym $mod+Ctrl+Right     focus    mode_toggle
+	bindsym $mod+a              focus    parent
+	bindsym $mod+z              focus    child
+	bindsym $mod+Shift+c        kill
+#}}}
+# WORKSPACE{{{
+	set $WS1 _
+	set $WS2 
+	set $WS3 
+	set $WS4 
+	set $WS5 
+	set $WS6 
+	set $WS7 
+	set $WS8 
+
+	bindsym $mod+1                               workspace $WS1
+	bindsym $mod+2                               workspace $WS2
+	bindsym $mod+3                               workspace $WS3
+	bindsym $mod+4                               workspace $WS4
+	bindsym $mod+5                               workspace $WS5
+	bindsym $mod+6                               workspace $WS6
+	bindsym $mod+7                               workspace $WS7
+	bindsym $mod+8                               workspace $WS8
+# move focused container to workspace
+	bindsym $mod+Shift+1      move container to  workspace $WS1
+	bindsym $mod+Shift+2      move container to  workspace $WS2
+	bindsym $mod+Shift+3      move container to  workspace $WS3
+	bindsym $mod+Shift+4      move container to  workspace $WS4
+	bindsym $mod+Shift+5      move container to  workspace $WS5
+	bindsym $mod+Shift+6      move container to  workspace $WS6
+	bindsym $mod+Shift+7      move container to  workspace $WS7
+	bindsym $mod+Shift+8      move container to  workspace $WS8
+# switch workspaces by mod+PgUp/PgDn
+	bindsym $mod+p                               workspace prev
+	bindsym $mod+n                               workspace next
+	bindsym $mod+Shift+p      move container to  workspace prev; workspace prev
+	bindsym $mod+Shift+n      move container to  workspace next; workspace next
+	bindsym $mod+Prior                           workspace prev
+	bindsym $mod+Next                            workspace next
+	bindsym $mod+Shift+Prior  move container to  workspace prev; workspace prev
+	bindsym $mod+Shift+Next   move container to  workspace next; workspace next
+
+	bindsym $mod+0   exec ~/.i3/i3-wsmove.sh next
+	bindsym $mod+9   exec ~/.i3/i3-wsmove.sh prev
+#}}}
+
+# COLORS {{{
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #00d3d3 #333333 #00eeee   #00eeee
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #000000
+
+#}}}
+# move focused window {{{
+	bindsym $mod+Shift+h     move   left
+	bindsym $mod+Shift+j     move   down
+	bindsym $mod+Shift+k     move   up
+	bindsym $mod+Shift+l     move   right
+
+	bindsym $mod+Shift+Left  move   left
+	bindsym $mod+Shift+Down  move   down
+	bindsym $mod+Shift+Up    move   up
+	bindsym $mod+Shift+Right move   right
+
+	bindsym $mod+Mod1+h      resize shrink width  10 px or 10 ppt
+	bindsym $mod+Mod1+j      resize grow   height 10 px or 10 ppt
+	bindsym $mod+Mod1+k      resize shrink height 10 px or 10 ppt
+	bindsym $mod+Mod1+l      resize grow   width  10 px or 10 ppt
+
+	bindsym $mod+Mod1+Left   resize shrink width  10 px or 10 ppt
+	bindsym $mod+Mod1+Down   resize grow   height 10 px or 10 ppt
+	bindsym $mod+Mod1+Up     resize shrink height 10 px or 10 ppt
+	bindsym $mod+Mod1+Right  resize grow   width  10 px or 10 ppt
+#}}}
+# reload the configuration file{{{
+	bindsym $mod+Shift+e reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+	bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#}}}
+bar {
+	#status_command i3blocks
+#	strip_workspace_numbers yes
+	position top
+}
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+floating_minimum_size 1x1
+for_window [class="stbar"] kill
+exec_always ~/.i3/start_stbar.sh
+for_window [class="stbar"] floating enable sticky enable border none move position 0 -1
+#for_window [class="mlterm"] floating enable sticky enable border none move position 0 -1
+no_focus [class="stbar"]
+
+assign [class="Surf"] $WS2
+assign [class="Wyeb"] $WS2
+assign [class="Luakit"] $WS2
+assign [class="Vimb"] $WS2
+assign [class="Yandex-browser.*"] $WS2
+assign [class="Remmina"] $WS8
+
+bindsym $mod+t border toggle
+show_marks yes
+new_window pixel 1
+hide_edge_borders smart
+
+workspace_layout tabbed
