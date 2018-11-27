@@ -51,6 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
+	globalias
 	git
 )
 

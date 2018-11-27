@@ -22,6 +22,22 @@ alias lr='ls -lR'               # рекурсивный обход подкат
 alias lt='ls -ltr'              # сортировка по дате
 alias tree='tree -ChD --noreport --dirsfirst'          # альтернатива 'ls'
 
+alias g='git '
+alias gst='git status'
+alias gs='git status'
+alias gsh='git show'
+alias gl='git pull'
+alias gp='git push'
+alias gd='git diff'
+alias gdh='git diff HEAD'
+alias gC='git clone'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gcap='git commit -v -a && git push'
+alias gpp='git pull; git push'
+
 export PAGER=less
 #/home/simsaf/.vim/bundle/vimpager/vimpager
 
@@ -82,7 +98,6 @@ alias rsync='rsync -Phr'
 alias free='free -h'
 alias maple='/home/simsaf/maple12/bin/maple'
 alias fum='fusermount -u '
-alias vimpager='/home/simsaf/.vim/bundle/vimpager/vimpager'
 alias ftpfs='printf "endIP: " && read  ipend && printf "\nLogin: " && read login && printf  "\nPass: " && read pass && curlftpfs ftp://$login:$pass@192.168.0.$ipend:3721/ temp-ftpfs-android/'
 alias tree='tree --timefmt %H:%M:%S -d'
 alias ls='ls --color=auto'
@@ -92,7 +107,6 @@ alias egrep='egrep --color=auto'
 alias hcat='highlight -O ansi'
 alias icat='catimg'
 alias google='echo -n "Google: " && read google && wyeb https://encrypted.google.com/search\?hl\=ru\&q\=$google &'
-alias gc='git clone'
 alias tremc='tremc -c simsaf:transdrone@127.0.0.1:9091'
 alias vimterm='vim -c terminal++curwin'
 alias tmuxin='~/sources/myShell/tmuxin.sh'
