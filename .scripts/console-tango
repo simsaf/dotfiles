@@ -1,0 +1,21 @@
+#!/bin/dash
+
+if [ "$TERM" == "linux" ]
+then
+	echo -en "\e]P0000000"    #  "#000000" black
+	echo -en "\e]P1cc0000"    #  "#cc0000" red"
+	echo -en "\e]P24e9a06"    #  "#4e9a06" green"
+	echo -en "\e]P3c4a000"    #  "#c4a000" yellow"
+	echo -en "\e]P43465a4"    #  "#3465a4" blue"
+	echo -en "\e]P575507b"    #  "#75507b" magenta"
+	echo -en "\e]P606989a"    #  "#06989a" cyan"
+	echo -en "\e]P7d3d3d3"    #  "#d3d3d3" lightgray
+	echo -en "\e]P8444444"    #  "#444444" gray
+	echo -en "\e]P9ef2929"    #  "#ef2929" red"
+	echo -en "\e]Pa8ae234"    #  "#8ae234" green"
+	echo -en "\e]Pbfce94f"    #  "#fce94f" yellow"
+	echo -en "\e]Pc729fcf"    #  "#729fcf" blue"
+	echo -en "\e]Pdad7fa8"    #  "#ad7fa8" magenta
+	echo -en "\e]Pe34e2e2"    #  "#34e2e2" cyan"
+	echo -en "\e]Pfeeeeec"    #  "#eeeeec" white"
+fi

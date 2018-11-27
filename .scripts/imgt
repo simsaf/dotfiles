@@ -1,0 +1,44 @@
+#!/bin/dash
+#
+# Based on script by z3bra -- 2014-01-21
+
+W3MIMGDISPLAY="/usr/lib/w3m/w3mimgdisplay"
+FONTH=14 # Size of one terminal row
+FONTW=7 # Size of one terminal column
+
+X=$1
+Y=$2
+COLUMNS=$3
+LINES=$4
+FILENAME=$5
+BORDERWIDTH=3
+
+WH=$(echo "5;$FILENAME" | $W3MIMGDISPLAY)
+width=${WH% *}
+height=${WH#* }
+#echo "$width:$height:$WH:$FILENAME" > err
+#if [ -z "$width" -o -z "$height" ]; then
+if [ -z "$width" ] && [ -z "$height" ]; then
+	echo 'Error: Failed to obtain image size.'
+	exit 1
+fi
+
+x=$((FONTW * X + BORDERWIDTH))
+y=$((FONTH * Y + BORDERWIDTH))
+
+max_width=$((FONTW * COLUMNS))
+max_height=$((FONTH * LINES))
+
+if [ "$width" -gt "$max_width" ]; then
+	height=$((height * max_width / width))
+	width=$max_width
+fi
+if [ "$height" -gt "$max_height" ]; then
+	width=$((width * max_height / height))
+	height=$max_height
+fi
+
+(
+echo "6;$x;$y;$max_width;$max_height\n3;" | $W3MIMGDISPLAY > /dev/null
+echo "0;1;$x;$y;$width;$height;;;;;$FILENAME\n4;\n3;" | $W3MIMGDISPLAY > /dev/null
+)
