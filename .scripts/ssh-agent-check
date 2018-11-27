@@ -1,0 +1,9 @@
+#!/bin/dash
+if pgrep "ssh-agent" > /dev/null
+then
+	export SSH_AUTH_SOCK="$(echo /tmp/ssh-*/*)"
+	export SSH_AGENT_PID="$(pgrep "ssh-agent")"
+	echo "$SSH_AUTH_SOCK \nPID: $SSH_AGENT_PID"
+else
+	eval $(ssh-agent -s)
+fi
