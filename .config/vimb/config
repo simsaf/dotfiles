@@ -63,6 +63,7 @@ shortcut-add d=http://dict.cc/?s=$0
 shortcut-add g=https://encrypted.google.com/search?q=$0
 shortcut-add y=http://www.youtube.com/results?search_query=$0
 shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
+shortcut-add gh=https://github.com/search?&q=%0
 
 # Set the shortcut as the default, that is the shortcut to be used if no
 # shortcut is given and the string to open is not an URI.
@@ -77,11 +78,12 @@ nmap zS :set smooth-scrolling!<CR>
 nmap zm :set stylesheet!<CR>
 nmap zs :set scripts!<CR>
 nmap zr :source ~/.config/vimb/config<CR>
+nmap ZQ :quit<CR>
 
-aug mygroup
-	au LoadCommitted * set scripts=off #|set cookie-accept=never
-	au LoadCommitted http{s,}://github.com/*.https://{m.,}vk.com/* set scripts=on
-aug end
+#aug mygroup
+#	au LoadCommitted * set scripts=off #|set cookie-accept=never
+#	au LoadCommitted http{s,}://github.com/*.https://{m.,}vk.com/* set scripts=on
+#aug end
 
 # GUI color settings
 # Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
