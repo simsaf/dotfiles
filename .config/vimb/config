@@ -61,7 +61,8 @@ set spacial-navigation=true
 shortcut-add duck=https://duckduckgo.com/?q=$0
 shortcut-add d=http://dict.cc/?s=$0
 shortcut-add g=https://encrypted.google.com/search?q=$0
-shortcut-add y=http://www.youtube.com/results?search_query=$0
+shortcut-add ya=https://yandex.ru/search?q=$0
+shortcut-add yt=http://www.youtube.com/results?search_query=$0
 shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
 shortcut-add gh=https://github.com/search?&q=%0
 
